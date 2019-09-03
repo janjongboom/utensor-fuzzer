@@ -5,6 +5,8 @@ const tf_y_str = fs.readFileSync('./out/tensorflow_y.txt', 'utf-8');
 const utensor_y_str = fs.readFileSync('./out/utensor_y.txt', 'utf-8');
 
 function getSubstringAsJson(output, beginStr, endStr) {
+    output = output.replace(/nan/g, 'null');
+    output = output.replace(/inf/g, 'null');
     let begin = output.indexOf(beginStr);
     let end = output.indexOf(endStr);
     return JSON.parse(output.substr(begin + beginStr.length, end - begin - beginStr.length));
@@ -31,7 +33,7 @@ for (let ix = 0; ix < tf_y.length; ix++) {
     }
 
     if (faulty) {
-        console.log(`ERR (line: ${ix+1}) - TensorFlow:`, tf_y[ix].map(n=>n.toFixed(5)), ', uTensor:', utensor_y[ix].map(n=>n.toFixed(5)));
+        console.log(`ERR (line: ${ix+1}) - TensorFlow:`, tf_y[ix].map(n=>n.toFixed(5)), ', uTensor:', utensor_y[ix].map(n=>n !== null ? n.toFixed(5) : n));
         total_fault++;
     }
     else {
