@@ -1,0 +1,4 @@
+*.gcda
+build/
+constants/
+out/
