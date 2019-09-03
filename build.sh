@@ -21,7 +21,7 @@ make utensor-model
 echo "Fix SoftmaxOp"
 
 # fix the softmaxop (for now)
-sed -i '.bak' "s/new SoftmaxOp(/new SoftmaxOp\<float,float\>(/g" ./source/trained.cpp       # note remove the '.bak' on Linux
+# sed -i '.bak' "s/new SoftmaxOp(/new SoftmaxOp\<float,float\>(/g" ./source/trained.cpp       # note remove the '.bak' on Linux
 rm -f ./source/trained.cpp.bak
 
 echo "Building uTensor classifier"
